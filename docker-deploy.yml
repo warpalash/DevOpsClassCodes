@@ -1,7 +1,7 @@
 - hosts: dev
   become: true
   tasks:
-    - name: Install direct docker
+    - name: Install docker
       apt:
         name: docker
         state: present
