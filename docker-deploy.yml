@@ -2,6 +2,16 @@
 - hosts: dev
   become: true
   tasks:
+    - name: Install packages for docker
+       apt: 
+         pkg:
+           - python
+           - python-pip
+      updated_cache: yes
+    - name: Install docker py
+        apt:
+           name: docker-py
+           state: started
     - name: Start docker container
       docker_container:
         name: addbook
