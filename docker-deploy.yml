@@ -4,12 +4,11 @@
   tasks:
     - name: Install pip
       apt:
-        name: python-pip
-        update_cache: yes
-    - name: Install dockerpy
-      apt:
-        name: docker-py
-        update_cache: yes
+        pkg:
+          - python
+          - python-pip
+          - docker-py
+      update_cache: yes
     - name: Start docker container
       docker_container:
         name: addbook
