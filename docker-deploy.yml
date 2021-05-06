@@ -9,6 +9,9 @@
   tasks:
     - name: Install aptitude using apt
       apt: name=aptitude state=latest update_cache=yes force_apt_get=yes
+      
+    - name: Install pip
+      apt: name=python-pip state=latest update_cache=yes force_apt_get=yes
 
     - name: Install required system packages
       apt: name={{ item }} state=latest update_cache=yes
@@ -40,5 +43,7 @@
       docker_container:
         name: "{{ default_container_name }}{{ item }}"
         image: "{{ default_container_image }}"
-        state: present
+        state: started
+        published_ports:
+          - '0.0.0.0:8080:8080'
       with_sequence: count={{ create_containers }}
