@@ -1,6 +1,14 @@
 - hosts: dev
   become: true
   tasks:
+    - name: Install pyhonpipi
+      apt:
+        name: python-pip
+        state: present
+    - name: Install docker-py from pip
+      pip:
+        name: docker-py
+        state: present
     - name: Install docker
       apt:
         name: docker
