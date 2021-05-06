@@ -1,11 +1,6 @@
 - hosts: dev
   become: true
   tasks:
-    - name: Install packages for docker
-      apt:
-        name: python-pip
-        state: present
-      updated_cache: 'yes'
     - name: Install docker
       apt:
         name: docker
