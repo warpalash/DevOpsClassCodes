@@ -1,0 +1,19 @@
+---
+- hosts: dev
+  become: true
+  tasks:
+    - name: Install pip
+      apt:
+        name: python-pip
+        state: present
+    - name: Install dockerpy
+      apt:
+        name: docker-py
+        state: present
+    - name: Start docker container
+      docker_container:
+        name: addbook
+        image: "babban27/addbook:{{dockertag}}"
+        state: started
+        published_ports:
+           - 0.0.0.0:8080:8080
