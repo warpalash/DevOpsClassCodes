@@ -3,14 +3,13 @@
   tasks:
     - name: Install packages for docker
       apt:
-        pkg:
-          - python
-          - python-pip
+        name: python-pip
+        state: present
       updated_cache: 'yes'
     - name: Install docker py
-      apt:
+      pip:
         name: docker-py
-        state: started
+        state: present
     - name: Start docker container
       docker_container:
         name: addbook
