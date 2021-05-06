@@ -1,11 +1,6 @@
 ---
 - hosts: dev
   become: true
-  vars:
-    create_containers: 2
-    default_container_name: dockerBABU
-    default_container_image: babban27/addbook:{{dockertag}}
-
   tasks:
     - name: Install aptitude using apt
       apt: name=aptitude state=latest update_cache=yes force_apt_get=yes
@@ -34,16 +29,10 @@
       pip:
         name: docker
 
-    - name: Pull default Docker image
-      docker_image:
-        name: "{{ default_container_image }}"
-        source: pull
-
-    - name: Create default containers
+    - name: Start docker container
       docker_container:
-        name: "{{ default_container_name }}{{ item }}"
-        image: "{{ default_container_image }}"
+        name: addbook
+        image: 'babban27/addbook:{{dockertag}}'
         state: started
         published_ports:
           - '0.0.0.0:8080:8080'
-      with_sequence: count={{ create_containers }}
