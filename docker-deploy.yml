@@ -10,6 +10,7 @@
       service:
         name: docker
         state: started
+        enabled: yes
     - name: Start docker container
       docker_container:
         name: addbook
