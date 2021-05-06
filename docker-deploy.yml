@@ -1,19 +1,30 @@
 - hosts: dev
   become: true
   tasks:
-    - name: Install pyhonpipi
-      apt:
-        name: python-pip
-        state: present
-    - name: Install docker-py from pip
-      pip:
-        name: docker-py
-        state: present
-    - name: Install docker
-      apt:
-        name: docker
-        state: present
-        update_cache: 'yes'
+#     - name: Install pyhonpipi
+#       apt:
+#         name: python-pip
+#         state: present
+#     - name: Install docker-py from pip
+#       pip:
+#         name: docker-py
+#         state: present
+#     - name: Install docker
+#       apt:
+#         name: docker
+#         state: present
+#         update_cache: 'yes'
+    - name: install Thanos docker
+      command: "{{item}}"
+      with_items:
+        - sudo apt-get update
+        - sudo apt-get install apt-transport-https ca-certificates curl gnupg lsb-release -y
+        - curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+	      - echo \
+           "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \
+            $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+        - sudo apt-get update
+	      - sudo apt-get install docker-ce
     - name: start docker 
       service:
         name: docker
