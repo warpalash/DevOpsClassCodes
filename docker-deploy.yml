@@ -6,10 +6,15 @@
         name: python-pip
         state: present
       updated_cache: 'yes'
-    - name: Install docker py
-      pip:
-        name: docker-py
+    - name: Install docker
+      apt:
+        name: docker
         state: present
+      updated_cache: 'yes'
+    - name: start docker 
+      apt:
+        name: docker
+        state: started
     - name: Start docker container
       docker_container:
         name: addbook
