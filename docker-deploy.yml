@@ -2,13 +2,6 @@
 - hosts: dev
   become: true
   tasks:
-    - name: Install pip
-      apt:
-        pkg:
-          - python
-          - python-pip
-          - docker-py
-      update_cache: yes
     - name: Start docker container
       docker_container:
         name: addbook
