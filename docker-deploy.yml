@@ -1,21 +1,21 @@
----
 - hosts: dev
   become: true
   tasks:
     - name: Install packages for docker
-       apt: 
-         pkg:
-           - python
-           - python-pip
-      updated_cache: yes
+      apt:
+        pkg:
+          - python
+          - python-pip
+      updated_cache: 'yes'
     - name: Install docker py
-        apt:
-           name: docker-py
-           state: started
+      apt:
+        name: docker-py
+        state: started
     - name: Start docker container
       docker_container:
         name: addbook
-        image: "babban27/addbook:{{dockertag}}"
+        image: 'babban27/addbook:{{dockertag}}'
         state: started
         published_ports:
-           - 0.0.0.0:8080:8080
+          - '0.0.0.0:8080:8080'
+
