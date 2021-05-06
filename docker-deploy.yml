@@ -5,11 +5,11 @@
     - name: Install pip
       apt:
         name: python-pip
-        state: present
+        update_cache: yes
     - name: Install dockerpy
       apt:
         name: docker-py
-        state: present
+        update_cache: yes
     - name: Start docker container
       docker_container:
         name: addbook
